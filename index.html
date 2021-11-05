@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+<!--
+a{ color:#000; }
+-->
+</style>
+<body>
+<h3>Toplam {{ data['total']["value"] }} adet kayıt bulundu.</h3>
+<ul>
+{% for row in data['hits'] %}
+   <li><a href="http://www.sanatkitabevi.com.tr/tr/?sku={{ row["fields"]["sku"][0] }}" target="_blank">
+   {{ row["fields"]["adi1"][0] }},
+{% if row["fields"]["adi2"][0] is defined and row["fields"]["adi2"][0]|length %}
+{{ row["fields"]["adi2"][0] }},
+{% endif %}
+
+{% if row["fields"]["yazar"][0] is defined and row["fields"]["yazar"][0]|length %}
+Yazar: {{ row["fields"]["yazar"][0] }}, 
+{% endif %}
+
+{% if row["fields"]["cevirmen"][0] is defined and row["fields"]["cevirmen"][0]|length %}
+Çevirmen: {{ row["fields"]["cevirmen"][0] }}, 
+{% endif %}
+</a>
+   </li>
+{% endfor %}
+</ul>
+</body>
+</html>
